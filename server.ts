@@ -10,6 +10,16 @@ app.use(express.static("public"));
 app.use(express.static("protected"));
 
 
+app.get("/list", async (req, res) => {
+  try {
+
+  } catch (err) {
+    console.log(err);
+    res.json({ err: "internal server error" });
+  }
+});
+
+
 app.get("/projection", async (req, res) => {
   try {
 
