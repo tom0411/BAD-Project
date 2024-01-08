@@ -15,30 +15,38 @@
 ////////////////////////////////////
 
 
-prediction
+history
 -------
 id integer PK
-date_id timestamp FK - comparison.id
-weather_id char (60) FK - weather.id
-temperature int
+date timestamp
+weekday_id char(12) FK >- date.id
 holiday boolean
-demand int
+temperature float
+rainfall float
+demand integer
 
 
-comparison
+date
+------
+id integer PK
+weekday char(12)
+month char(12)
+
+
+Projection
 -------
 id integer PK
-date_last_yr timestamp timestamp
+date_predict timestamp
+temp_predict float
+rain_predict float
+demand_predict integer
 
 
-weather
--------
-id integer PK
-condition txt
+
 
 
 # view: (77, 5)
 # zoom: 0.726
-# prediction (142, 353)
-# comparison (371, 264)
-# weather (0, 0)
+# history (354, 127)
+# Projection (50, 35)
+# date (94, 232)
