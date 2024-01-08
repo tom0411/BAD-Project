@@ -1,0 +1,44 @@
+# Visualize on https://erd.surge.sh
+# or https://quick-erd.surge.sh
+#
+# Relationship Types
+#  -    - one to one
+#  -<   - one to many
+#  >-   - many to one
+#  >-<  - many to many
+#  -0   - one to zero or one
+#  0-   - zero or one to one
+#  0-0  - zero or one to zero or one
+#  -0<  - one to zero or many
+#  >0-  - zero or many to one
+#
+////////////////////////////////////
+
+
+prediction
+-------
+id integer PK
+date_id timestamp FK - comparison.id
+weather_id char (60) FK - weather.id
+temperature int
+holiday boolean
+demand int
+
+
+comparison
+-------
+id integer PK
+date_last_yr timestamp timestamp
+
+
+weather
+-------
+id integer PK
+condition txt
+
+
+# view: (77, 5)
+# zoom: 0.726
+# prediction (142, 353)
+# comparison (371, 264)
+# weather (0, 0)
