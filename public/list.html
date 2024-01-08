@@ -43,49 +43,53 @@
       padding: 5px;
       text-align: left;
     }
+
     .dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
+      background-color: #4CAF50;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+    .dropdown-content a:hover {
+      background-color: #f1f1f1
+    }
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
 
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
-}
+    .dropdown:hover .dropbtn {
+      background-color: #3e8e41;
+    }
 
-
-
-
+    .list {
+      display: flex;
+      justify-content:space-around;
+    }
   </style>
 
 
@@ -203,7 +207,7 @@
           </a>
         </li>
         <li>
-          <a href="list.html" class="nav-link text-white">
+          <a href="#" class="nav-link text-white">
             <svg class="bi me-2" width="16" height="16">
               <use xlink:href="#table" />
             </svg>
@@ -247,47 +251,23 @@
         </ul>
       </div>
     </div>
-    <div>
-      <h1>Projection for next 7 days</h1>
 
 
-      <table style="height:10%">
-        <tr>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-        </tr>
-        <tr>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-        </tr>
-        <tr>
-          <td>Average Tempreature</td>
-          <td>10°C</td>
-          <td>10°C</td>
-          <td>10°C</td>
-          <td>10°C</td>
-          <td>10°C</td>
-          <td>10°C</td>
-          <td>10°C</td>
-        </tr>
-      </table>
-
-
+    <div class="list">
+      <h1>List</h1>
+      <div class="dropdown">
+        <button class="dropbtn">Dropdown</button>
+        <div class="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
       </div>
-      </div>
-<!-- Example single danger button -->
+    </div>
+
+    </div>
+    </div>
+    <!-- Example single danger button -->
 
   </main>
   </div>
