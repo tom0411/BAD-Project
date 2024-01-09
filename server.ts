@@ -2,6 +2,7 @@
 import express from "express";
 import { env } from "./env";
 import { client } from "./db";
+import path from 'path';
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
@@ -22,7 +23,7 @@ app.get("/list", async (req, res) => {
 
 app.get("/projection", async (req, res) => {
   try {
-
+    res.sendFile(path.join(__dirname, 'public', 'projection.html'));
   } catch (err) {
     console.log(err);
     res.json({ err: "internal server error" });
