@@ -2,12 +2,8 @@
 import express from "express";
 import { env } from "./env";
 import { client } from "./db";
-<<<<<<< HEAD
 //import { projectionRouter } from "./services/projection";
-
-=======
 import path from 'path';
->>>>>>> refs/remotes/origin/main
 const app = express();
 
 app.use(express.json());
