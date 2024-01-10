@@ -2,8 +2,12 @@
 import express from "express";
 import { env } from "./env";
 import { client } from "./db";
+<<<<<<< HEAD
 //import { projectionRouter } from "./services/projection";
 
+=======
+import path from 'path';
+>>>>>>> refs/remotes/origin/main
 const app = express();
 
 app.use(express.json());
@@ -28,7 +32,7 @@ app.get("/list", async (req, res) => {
 
 app.get("/projection", async (req, res) => {
   try {
-
+    res.sendFile(path.join(__dirname, 'public', 'projection.html'));
   } catch (err) {
     console.log(err);
     res.json({ err: "internal server error" });
