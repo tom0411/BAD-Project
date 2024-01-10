@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsRegressor
-
+import math
 import matplotlib.pyplot as plt
 
 
@@ -65,7 +65,8 @@ new_data = [[0,20,2.8]]  # Replace this with your new data
 
 # Normalize and make a prediction using the trained model
 predicted_demand = regressor.predict(new_data)  # Use regressor instead of best_knn
+rounded_demand = math.floor(predicted_demand[0])
 
-print("Predicted Demand:", predicted_demand[0])
+print( rounded_demand)
 
 
