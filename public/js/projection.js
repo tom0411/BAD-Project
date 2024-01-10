@@ -56,6 +56,16 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     }
     tbody.appendChild(row4);
 
+    
+    let row5 = document.createElement('tr');
+    let firstCellRow5 = document.createElement('td');
+    firstCellRow5.textContent = 'Predicted Amount'; // This can be a header or some data
+    row5.appendChild(firstCellRow5);
+    for (let days of data.weatherForecast) {
+
+    }
+    tbody.appendChild(row5);
+
 })
 .catch(error => {
     console.error('There has been a problem with your fetch operation:', error);
