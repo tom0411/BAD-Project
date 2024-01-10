@@ -10,7 +10,8 @@
   <title>Sidebars · Bootstrap v5.0</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sidebars/">
-
+  <!-- Include Bootstrap CSS from CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3pV0n4V7KGx6BlRFj91FtXBTp6CybR1B+0tSTqP6QJARTcHHsUibQUjNS" crossorigin="anonymous">
 
 
   <!-- Bootstrap core CSS -->
@@ -256,54 +257,11 @@
       <h1>Projection for next 7 days</h1>
 
 
-      <table style="height:10%">
-        <tr>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-          <th>Date</th>
-        </tr>
-        <tr>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-          <th>Weather</th>
-        </tr>
-        <tr>
-          <td>Average Temperature</td>
-          <td>10°C</td>
-          <td>10°C</td>
-          <td>10°C</td>
-          <td>10°C</td>
-          <td>10°C</td>
-          <td>10°C</td>
-          <td>10°C</td>
-        </tr>
+      <table id="fromHKO" class="table table-hover table-dark">
 
- 
-          <tr>
-            <th scope="row">Predicted amount</th>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>123</td>
-            <td>2345</td>
-            <td>43451</td>
-            <td>1241</td>
-          </tr>
+        <tbody>
+          <!-- Table rows will be inserted here by your JavaScript -->
         </tbody>
-      </table>
-
-      <table id="fromHKO"></table>
-
     </div>
     </div>
   </main>
