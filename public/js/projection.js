@@ -49,12 +49,33 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     let firstCellRow4 = document.createElement('td');
     firstCellRow4.textContent = 'Rainfall'; // This can be a header or some data
     row4.appendChild(firstCellRow4);
+    
     for (let days of data.weatherForecast) {
         let item = document.createElement('td');
         item.textContent = days.PSR;
         row4.appendChild(item);
+    
+        if (item.textContent === 'Low') {
+            console.log(Math.round(Math.random() * 5));  // Log a random number between 0 and 5
+        }
+        else if (item.textContent === 'Medium Low') {
+            console.log(Math.round(Math.random() * 3.3)); // Log a random number between 0 and 3.3
+        }
+        else if (item.textContent === 'Medium') {
+            console.log(Math.round(Math.random() * 3.3 + 3.3)); // Log a random number between 3.3 and 6.6
+        }
+        else if (item.textContent === 'Medium High') {
+            console.log(Math.round(Math.random() * (77 - 31.7) + 31.7)); // Log a random number between 31.7 and 77
+        }
+        else if (item.textContent === 'High') {
+            console.log(Math.round(Math.random() * 77)); // Log a random number between 0 and 77
+        }
+        
+        tbody.appendChild(row4);
     }
+    
     tbody.appendChild(row4);
+    
 
     
     let row5 = document.createElement('tr');
