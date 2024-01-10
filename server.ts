@@ -2,9 +2,15 @@
 import express from "express";
 import { env } from "./env";
 import { client } from "./db";
+//import { projectionRouter } from "./services/projection";
+
 const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded());
+
+//app.use(projectionRouter);
+
 // Serve static files from 'public' directory
 app.use(express.static("public"));
 app.use(express.static("protected"));
