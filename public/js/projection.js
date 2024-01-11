@@ -1,3 +1,4 @@
+
 const holidays = ['20220101', '20220201', '20220202', '20220203',
 '20220405', '20220415', '20220416', '20220418',
 '20220502', '20220509', '20220603', '20220701',
@@ -31,7 +32,9 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     DateRow.appendChild(LeftCell1);
     for (let days of data.weatherForecast) {
         let item = document.createElement('td');
-        item.textContent = days.forecastDate;
+        let text = days.forecastDate;
+        let parseDate = new Date (text.substr(0,4) + " " + text.substr(4,2) + " " + text.substr(6,2));
+        item.textContent = parseDate.getDate() + " / " + parseInt(parseDate.getMonth()+1) + " / " + parseDate.getFullYear();
         DateRow.appendChild(item);
     }
     tbody.appendChild(DateRow);
@@ -90,7 +93,7 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     
     tbody.appendChild(RainRow);
     
-
+// checking whether the date is public holiday or not
     let phRow = document.createElement('tr');
     let LeftCell5 = document.createElement('td');
     LeftCell5.textContent = 'Public Holiday';
