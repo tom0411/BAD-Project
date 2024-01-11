@@ -27,6 +27,8 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     let tbody = document.querySelector('tbody') || document.body.appendChild(document.createElement('tbody'));
     let Weekday_Array = [];
     let Rainfall_Array = [];
+    let Temperature_Array = [];
+    let PublicHoliday_Array = [];
     let DateRow = document.createElement('tr');
     let LeftCell1 = document.createElement('td');
     LeftCell1.textContent = 'Date'; // This can be a header or some data
@@ -52,9 +54,10 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
             Weekday_Array.push(1);
         }
     }
-    console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));// Log the array outside of the loop
+   
     tbody.appendChild(WeekRow);
 
+ 
     let TempRow = document.createElement('tr');
     let LeftCell3 = document.createElement('td');
     LeftCell3.textContent = 'Avg Temp (˚C)'; // This can be a header or some data
@@ -63,9 +66,11 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
         let item = document.createElement('td');
         let avgTemp = (days.forecastMaxtemp.value + days.forecastMintemp.value) / 2;
         item.textContent = avgTemp.toFixed(1); // Assuming you want to show one decimal place
+        Temperature_Array.push(avgTemp); // Push average temperature into Temperature_Array
         TempRow.appendChild(item);
     }
     tbody.appendChild(TempRow);
+   
 
     let RainRow = document.createElement('tr');
     let LeftCell4 = document.createElement('td');
@@ -92,25 +97,28 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
         tbody.appendChild(RainRow);
     }
     
-    console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
+
     
 
     let phRow = document.createElement('tr');
     let LeftCell5 = document.createElement('td');
-    LeftCell5.textContent = 'Public Weekday_Array';
+    LeftCell5.textContent = 'Public Holiday';
     phRow.appendChild(LeftCell5);
     for (let days of data.weatherForecast) {
-    let item = document.createElement('td');
+        let item = document.createElement('td');
         if (holiday.includes(days.forecastDate)) {
-    item.textContent = true;
-    phRow.appendChild(item);
-        } else {item.textContent =  false
-                phRow.appendChild(item);};
+            item.textContent = 'True'; // Capitalize the first letter
+            PublicHoliday_Array.push(1);
+            phRow.appendChild(item);
+        } else {
+            item.textContent = 'False'; // Capitalize the first letter
+            phRow.appendChild(item);
+            PublicHoliday_Array.push(0);
+        }
     }
     tbody.appendChild(phRow);
 
 
-    
     let PredictRow = document.createElement('tr');
     let LeftCell6 = document.createElement('td');
     LeftCell6.textContent = 'Predicted Amount'; // This can be a header or some data
@@ -119,11 +127,11 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
 
     }
     tbody.appendChild(PredictRow);
-
-    function createArray(...elements) {
-        return elements;
-      }
-
+    //console.log the varible array
+    console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
+    console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
+    console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
+    console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array))
 })
 .catch(error => {
     console.error('There has been a problem with your fetch operation:', error);
