@@ -1,4 +1,4 @@
-const holidays = ['20220101', '20220201', '20220202', '20220203',
+const holiday = ['20220101', '20220201', '20220202', '20220203',
 '20220405', '20220415', '20220416', '20220418',
 '20220502', '20220509', '20220603', '20220701',
 '20220912', '20221001', '20221004', '20221226',
@@ -10,7 +10,7 @@ const holidays = ['20220101', '20220201', '20220202', '20220203',
 '20240212', '20240213', '20240329', '20240330',
 '20240401', '20240404', '20240501', '20240515',
 '20240610', '20240701', '20240918', '20241001',
-'20241011', '20241225', '20241226'];    
+'20241011', '20241225', '20241226'];
 
 
 fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en')
@@ -33,9 +33,7 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     DateRow.appendChild(LeftCell1);
     for (let days of data.weatherForecast) {
         let item = document.createElement('td');
-        let text = days.forecastDate;
-        let parseDate = new Date (text.substr(0,4) + " " + text.substr(4,2) + " " + text.substr(6,2));
-        item.textContent = parseDate.getDate() + " / " + parseInt(parseDate.getMonth()+1) + " / " + parseDate.getFullYear();
+        item.textContent = days.forecastDate;
         DateRow.appendChild(item);
     }
     tbody.appendChild(DateRow);
@@ -96,14 +94,14 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     
     console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
     
-// checking whether the date is public holiday or not
+
     let phRow = document.createElement('tr');
     let LeftCell5 = document.createElement('td');
     LeftCell5.textContent = 'Public Weekday_Array';
     phRow.appendChild(LeftCell5);
     for (let days of data.weatherForecast) {
     let item = document.createElement('td');
-        if (Weekday_Arrays.includes(days.forecastDate)) {
+        if (holiday.includes(days.forecastDate)) {
     item.textContent = true;
     phRow.appendChild(item);
         } else {item.textContent =  false
