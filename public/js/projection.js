@@ -40,7 +40,7 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     
     let WeekRow = document.createElement('tr');
     let LeftCell2 = document.createElement('td');
-    LeftCell2.textContent = 'Weekday_Array'; // This can be a header or some data
+    LeftCell2.textContent = 'Weekday'; // This can be a header or some data
     WeekRow.appendChild(LeftCell2);
     for (let days of data.weatherForecast) {
         let item = document.createElement('td');
@@ -69,7 +69,7 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
 
     let RainRow = document.createElement('tr');
     let LeftCell4 = document.createElement('td');
-    LeftCell4.textContent = 'Rainfall_Array'; // This can be a header or some data
+    LeftCell4.textContent = 'Rainfall'; // This can be a header or some data
     RainRow.appendChild(LeftCell4);
     
     for (let days of data.weatherForecast) {
