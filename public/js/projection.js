@@ -1,3 +1,17 @@
+const holidays = ['20220101', '20220201', '20220202', '20220203',
+'20220405', '20220415', '20220416', '20220418',
+'20220502', '20220509', '20220603', '20220701',
+'20220912', '20221001', '20221004', '20221226',
+'20221227', '20230102', '20230123', '20230124',
+'20230125', '20230405', '20230407', '20230408',
+'20230410', '20230501', '20230526', '20230622',
+'20230701', '20230930', '20231002', '20231023',
+'20231225', '20231226', '20240101', '20240210',
+'20240212', '20240213', '20240329', '20240330',
+'20240401', '20240404', '20240501', '20240515',
+'20240610', '20240701', '20240918', '20241001',
+'20241011', '20241225', '20241226'];
+
 
 fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en')
 .then(res => {
@@ -11,49 +25,49 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
 
     let tbody = document.querySelector('tbody') || document.appendChild(document.createElement('tbody'));
     
-    let row1 = document.createElement('tr');
-    let firstCellRow1 = document.createElement('td');
-    firstCellRow1.textContent = 'Date'; // This can be a header or some data
-    row1.appendChild(firstCellRow1);
+    let DateRow = document.createElement('tr');
+    let LeftCell1 = document.createElement('td');
+    LeftCell1.textContent = 'Date'; // This can be a header or some data
+    DateRow.appendChild(LeftCell1);
     for (let days of data.weatherForecast) {
         let item = document.createElement('td');
         item.textContent = days.forecastDate;
-        row1.appendChild(item);
+        DateRow.appendChild(item);
     }
-    tbody.appendChild(row1);
+    tbody.appendChild(DateRow);
 
-    let row2 = document.createElement('tr');
-    let firstCellRow2 = document.createElement('td');
-    firstCellRow2.textContent = 'Weekday'; // This can be a header or some data
-    row2.appendChild(firstCellRow2);
+    let WeekRow = document.createElement('tr');
+    let LeftCell2 = document.createElement('td');
+    LeftCell2.textContent = 'Weekday'; // This can be a header or some data
+    WeekRow.appendChild(LeftCell2);
     for (let days of data.weatherForecast) {
         let item = document.createElement('td');
         item.textContent = days.week;
-        row2.appendChild(item);
+        WeekRow.appendChild(item);
     }
-    tbody.appendChild(row2);
+    tbody.appendChild(WeekRow);
 
-    let row3 = document.createElement('tr');
-    let firstCellRow3 = document.createElement('td');
-    firstCellRow3.textContent = 'Avg Temp (˚C)'; // This can be a header or some data
-    row3.appendChild(firstCellRow3);
+    let TempRow = document.createElement('tr');
+    let LeftCell3 = document.createElement('td');
+    LeftCell3.textContent = 'Avg Temp (˚C)'; // This can be a header or some data
+    TempRow.appendChild(LeftCell3);
     for (let days of data.weatherForecast) {
         let item = document.createElement('td');
         let avgTemp = (days.forecastMaxtemp.value + days.forecastMintemp.value) / 2;
         item.textContent = avgTemp.toFixed(1); // Assuming you want to show one decimal place
-        row3.appendChild(item);
+        TempRow.appendChild(item);
     }
-    tbody.appendChild(row3);
+    tbody.appendChild(TempRow);
 
-    let row4 = document.createElement('tr');
-    let firstCellRow4 = document.createElement('td');
-    firstCellRow4.textContent = 'Rainfall'; // This can be a header or some data
-    row4.appendChild(firstCellRow4);
+    let RainRow = document.createElement('tr');
+    let LeftCell4 = document.createElement('td');
+    LeftCell4.textContent = 'Rainfall'; // This can be a header or some data
+    RainRow.appendChild(LeftCell4);
     
     for (let days of data.weatherForecast) {
         let item = document.createElement('td');
         item.textContent = days.PSR;
-        row4.appendChild(item);
+        RainRow.appendChild(item);
     
         if (item.textContent === 'Low') {
             console.log(Math.round(Math.random() * 5));  // Log a random number between 0 and 5
@@ -71,21 +85,36 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
             console.log(Math.round(Math.random() * 77)); // Log a random number between 0 and 77
         }
         
-        tbody.appendChild(row4);
+        tbody.appendChild(RainRow);
     }
     
-    tbody.appendChild(row4);
+    tbody.appendChild(RainRow);
     
 
+    let phRow = document.createElement('tr');
+    let LeftCell5 = document.createElement('td');
+    LeftCell5.textContent = 'Public Holiday';
+    phRow.appendChild(LeftCell5);
+    for (let days of data.weatherForecast) {
+    let item = document.createElement('td');
+        if (holidays.includes(days.forecastDate)) {
+    item.textContent = true;
+    phRow.appendChild(item);
+        } else {item.textContent =  false
+                phRow.appendChild(item);};
+    }
+    tbody.appendChild(phRow);
+
+
     
-    let row5 = document.createElement('tr');
-    let firstCellRow5 = document.createElement('td');
-    firstCellRow5.textContent = 'Predicted Amount'; // This can be a header or some data
-    row5.appendChild(firstCellRow5);
+    let PredictRow = document.createElement('tr');
+    let LeftCell6 = document.createElement('td');
+    LeftCell6.textContent = 'Predicted Amount'; // This can be a header or some data
+    PredictRow.appendChild(LeftCell6);
     for (let days of data.weatherForecast) {
 
     }
-    tbody.appendChild(row5);
+    tbody.appendChild(PredictRow);
 
 })
 .catch(error => {
@@ -93,13 +122,13 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
 });
 
 /*
-
+// altenative table structuring way with function
 function loop (x,y) {
     let row = document.createElement('tr');
 
-    let firstCellRow = document.createElement('td');
-    firstCellRow.textContent = x;
-    row.appendChild(firstCellRow);
+    let LeftCell = document.createElement('td');
+    LeftCell.textContent = x;
+    row.appendChild(LeftCell);
 
 for (let days of data.weatherForecast) {
     let item = document.createElement('td');
