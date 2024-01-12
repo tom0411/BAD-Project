@@ -26,14 +26,14 @@ app.get("/list", async (req, res) => {
 });
 
 
-app.get("/projection", async (req, res) => {
-  try {
-    res.sendFile(path.join(__dirname, 'public', 'projection.html'));
-  } catch (err) {
-    console.log(err);
-    res.json({ err: "internal server error" });
-  }
-});
+// app.get("/projection", async (req, res) => {
+//   try {
+//     res.sendFile(path.join(__dirname, 'public', 'projection.html'));
+//   } catch (err) {
+//     console.log(err);
+//     res.json({ err: "internal server error" });
+//   }
+// });
 
 app.use((req, res) => {
   res.status(404).json({ err: "Not Found" });

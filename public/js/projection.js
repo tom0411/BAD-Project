@@ -13,16 +13,13 @@ const holiday = ['20220101', '20220201', '20220202', '20220203',
 '20241011', '20241225', '20241226'];
 
 
-fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=en')
 
-.then(res => {
-    if (!res.ok) {
-        throw new Error('Network response was not ok ' + res.statusText);
-    }
-    return res.json();
-})
-.then(data => {
-    console.log(data.weatherForecast);
+async function loadTable () {
+    let res = await fetch(`/general/forecast`);
+    let fetchData = await res.json();
+    console.log(fetchData.weatherForecast);
+    
+
 
     let tbody = document.querySelector('tbody') || document.body.appendChild(document.createElement('tbody'));
     let Weekday_Array = [];
@@ -33,7 +30,7 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     let LeftCell1 = document.createElement('td');
     LeftCell1.textContent = 'Date'; // This can be a header or some data
     DateRow.appendChild(LeftCell1);
-    for (let days of data.weatherForecast) {
+    for (let days of fetchData.weatherForecast) {
         let item = document.createElement('td');
         item.textContent = days.forecastDate;
         DateRow.appendChild(item);
@@ -44,7 +41,7 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     let LeftCell2 = document.createElement('td');
     LeftCell2.textContent = 'Weekday'; // This can be a header or some data
     WeekRow.appendChild(LeftCell2);
-    for (let days of data.weatherForecast) {
+    for (let days of fetchData.weatherForecast) {
         let item = document.createElement('td');
         item.textContent = days.week;
         WeekRow.appendChild(item);
@@ -53,8 +50,7 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
         } else if (item.textContent === 'Saturday' || item.textContent === 'Sunday') {
             Weekday_Array.push(1);
         }
-    }
-   
+    } 
     tbody.appendChild(WeekRow);
 
  
@@ -62,7 +58,7 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     let LeftCell3 = document.createElement('td');
     LeftCell3.textContent = 'Avg Temp (˚C)'; // This can be a header or some data
     TempRow.appendChild(LeftCell3);
-    for (let days of data.weatherForecast) {
+    for (let days of fetchData.weatherForecast) {
         let item = document.createElement('td');
         let avgTemp = (days.forecastMaxtemp.value + days.forecastMintemp.value) / 2;
         item.textContent = avgTemp.toFixed(1); // Assuming you want to show one decimal place
@@ -77,7 +73,7 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     LeftCell4.textContent = 'Rainfall'; // This can be a header or some data
     RainRow.appendChild(LeftCell4);
     
-    for (let days of data.weatherForecast) {
+    for (let days of fetchData.weatherForecast) {
         let item = document.createElement('td');
         item.textContent = days.PSR;
         RainRow.appendChild(item);
@@ -104,7 +100,7 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     let LeftCell5 = document.createElement('td');
     LeftCell5.textContent = 'Public Holiday';
     phRow.appendChild(LeftCell5);
-    for (let days of data.weatherForecast) {
+    for (let days of fetchData.weatherForecast) {
         let item = document.createElement('td');
         if (holiday.includes(days.forecastDate)) {
             item.textContent = 'True'; // Capitalize the first letter
@@ -123,24 +119,24 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     let LeftCell6 = document.createElement('td');
     LeftCell6.textContent = 'Predicted Amount'; // This can be a header or some data
     PredictRow.appendChild(LeftCell6);
-    for (let days of data.weatherForecast) {
+    for (let days of fetchData.weatherForecast) {
 
     }
     tbody.appendChild(PredictRow);
     //console.log the varible array
     console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
     console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
-    console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
-    console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array))
-})
-.catch(error => {
-    console.error('There has been a problem with your fetch operation:', error);
-});
+    console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array));
+    console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array));
+}
+
+loadTable();
+
 
 
 
 /*
-// altenative table structuring way with function
+// *** altenative table structuring way with function ***
 function loop (x,y) {
     let row = document.createElement('tr');
 
