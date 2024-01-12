@@ -1,15 +1,15 @@
 // server.ts
 import express from "express";
 import { env } from "./env";
-import { client } from "./db";
-//import { projectionRouter } from "./services/projection";
+// import { client } from "./db";
+import { projectionRouter } from "./services/projection";
 import path from 'path';
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded());
 
-//app.use(projectionRouter);
+app.use(projectionRouter);
 
 // Serve static files from 'public' directory
 app.use(express.static("public"));
