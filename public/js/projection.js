@@ -132,8 +132,29 @@ async function loadTable () {
 
 loadTable();
 
+    console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
+    console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array))
+    const newArrays = [];
+    for (let i = 0; i < data.weatherForecast.length; i++) {
+        if (Weekday_Array.length > i && Temperature_Array.length > i &&
+            Rainfall_Array.length > i && PublicHoliday_Array.length > i) {
+            newArrays.push([
+                Weekday_Array[i],
+                Temperature_Array[i],
+                Rainfall_Array[i],
+                PublicHoliday_Array[i]
+            ]);
+        }
+    }
+
+    // Log the new arrays
+    newArrays.forEach((arr, index) => {
+        console.log(`new_data: ` + JSON.stringify(arr));
+    });
 
 
+
+    // ... (Any additional code)
 
 /*
 // *** altenative table structuring way with function ***
