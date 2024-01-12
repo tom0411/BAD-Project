@@ -30,7 +30,8 @@ async function loadTable() {
     DateRow.appendChild(LeftCell1);
     for (let days of fetchData.weatherForecast) {
         let item = document.createElement('td');
-        item.textContent = days.forecastDate;
+        let stringDate = days.forecastDate;
+        item.textContent = stringDate.substr(6,2) + "/" + stringDate.substr(4,2) + "/" + stringDate.substr(0,4);
         DateRow.appendChild(item);
     }
     tbody.appendChild(DateRow);
