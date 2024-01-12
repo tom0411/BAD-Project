@@ -132,12 +132,32 @@ fetch('https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&
     console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
     console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
     console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array))
+    const newArrays = [];
+    for (let i = 0; i < data.weatherForecast.length; i++) {
+        if (Weekday_Array.length > i && Temperature_Array.length > i &&
+            Rainfall_Array.length > i && PublicHoliday_Array.length > i) {
+            newArrays.push([
+                Weekday_Array[i],
+                Temperature_Array[i],
+                Rainfall_Array[i],
+                PublicHoliday_Array[i]
+            ]);
+        }
+    }
+
+    // Log the new arrays
+    newArrays.forEach((arr, index) => {
+        console.log(`new_data: ` + JSON.stringify(arr));
+    });
 })
+
+
+
 .catch(error => {
-    console.error('There has been a problem with your fetch operation:', error);
+    console.error('There was a problem with the fetch operation:', error);
 });
 
-
+    // ... (Any additional code)
 
 /*
 // altenative table structuring way with function
