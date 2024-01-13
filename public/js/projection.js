@@ -115,6 +115,18 @@ async function loadTable() {
     tbody.appendChild(phRow);
 
 
+    let rowPic = document.createElement('tr');
+    let leftSidePic = document.createElement('td');
+    leftSidePic.textContent = 'Condition';
+    rowPic.appendChild(leftSidePic);
+        for (let days of fetchData.weatherForecast) {
+            let item = document.createElement('td');
+            item.innerHTML = `<img src="https://www.hko.gov.hk/images/HKOWxIconOutline/pic${days.ForecastIcon}.png" width="50%"/>`;
+            rowPic.appendChild(item);
+    }
+    tbody.appendChild(rowPic);
+    
+
     let PredictRow = document.createElement('tr');
     let LeftCell6 = document.createElement('td');
     LeftCell6.textContent = 'Predicted Amount'; // This can be a header or some data
