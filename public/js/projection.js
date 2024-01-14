@@ -154,11 +154,21 @@ async function loadTable() {
     }
 
     // Log the new arrays
-    newArrays.forEach((arr, index) => {
-        console.log(`new_data: ` + JSON.stringify(arr));
+    newArrays.forEach((arr) => {
+        console.log(`projection_data: ` + JSON.stringify(arr));
     });
+      
 
+    fetch('http://localhost:8000/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newArrays)
 
+    })
+    .then(response => response.json())
+    .then(data => console.log(data));
 
 
 // .catch(error => {
