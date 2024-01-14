@@ -18,7 +18,7 @@ app.use(express.static("protected"));
 
 app.get("/list", async (req, res) => {
   try {
-
+      res.sendFile(path.join(__dirname, 'public', 'list.html'));
   } catch (err) {
     console.log(err);
     res.json({ err: "internal server error" });
