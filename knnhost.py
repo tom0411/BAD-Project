@@ -2,7 +2,7 @@ from sanic import Sanic
 from sanic.response import json
 import joblib
 import math
-app = Sanic("App_Name")
+
 from sanic import Sanic, response
 
 from sanic_cors import CORS, cross_origin
@@ -28,9 +28,10 @@ CORS(app)
 
 @app.route("/", methods=["POST", "GET"])
 async def receive_data(request):
-    data = request.json
-    print("projection_data:", data)
-    # You can process the data as needed here
+    datas = request.json
+    for data in datas:
+        print("new_data =", data)
+        # You can process the data as needed here
     return response.json({"status": "Data received successfully"})
 
 # def test(request):

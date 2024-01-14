@@ -155,7 +155,7 @@ async function loadTable() {
 
     // Log the new arrays
     newArrays.forEach((arr) => {
-        console.log(`projection_data: ` + JSON.stringify(arr));
+        console.log(`receieved_data: ` + JSON.stringify(arr));
     });
       
 
