@@ -127,14 +127,7 @@ async function loadTable() {
     tbody.appendChild(rowPic);
     
 
-    let PredictRow = document.createElement('tr');
-    let LeftCell6 = document.createElement('td');
-    LeftCell6.textContent = 'Predicted Amount'; // This can be a header or some data
-    PredictRow.appendChild(LeftCell6);
-    for (let days of fetchData.weatherForecast) {
 
-    }
-    tbody.appendChild(PredictRow);
     //console.log the varible array
     console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
     console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
@@ -159,18 +152,53 @@ async function loadTable() {
     });
       
 
-    fetch('http://localhost:8000/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newArrays)
+  
 
-    })
-    .then(response => response.json())
-    .then(data => console.log(data));
+// Assuming 'tbody' is already defined and is the correct <tbody> element of your table
+// Replace with your actual tbody selector
 
+fetch('http://localhost:8000/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newArrays) // Make sure newArrays is defined and holds the data you want to send
+})
+.then(response => response.json()) // Parse the JSON from the response
+.then(data => {
+    // Access the "Predicted demands" property of the object and print it
+    if (data && Array.isArray(data["Predicted demands"])) {
+        // Log the array from the "Predicted demands" property
+        console.log(data["Predicted demands"]);
 
+        // Your predicted data array
+        let predictions = data["Predicted demands"];
+
+        // Create a new table row for predictions
+        let PredictRow = document.createElement('tr');
+
+        // Add a header or label cell to the row
+        let headerCell = document.createElement('td');
+        headerCell.textContent = 'Predicted Amount';
+        PredictRow.appendChild(headerCell);
+
+        // Loop through the predictions array
+        for (let predictedValue of predictions) {
+            // Create a new cell for the current predicted value
+            let cell = document.createElement('td');
+            cell.textContent = predictedValue;
+            PredictRow.appendChild(cell); // Append the cell to the PredictRow
+        }
+
+        // Append the new row to the table body
+        tbody.appendChild(PredictRow);
+    } else {
+        console.log("No 'Predicted demands' array found or the property is not an array.");
+    }
+})
+.catch(error => {
+    console.error('Error:', error);
+}); // Append the entire row to the table body
 // .catch(error => {
 //     console.error('There was a problem with the fetch operation:', error);
 // });
