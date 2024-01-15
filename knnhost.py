@@ -37,19 +37,24 @@ async def receive_data(request):
         rounded_demand = math.floor(predicted_demand[0])
         predictions.append(rounded_demand)
         all_predictions.append({"input": new_data, "predicted_demand": rounded_demand})
-        # print("Predicted demand = {}".format(rounded_demand))  有冇都okay
+
+        # print on terminal,有冇都okay
+        # print("Predicted demand = {}".format(rounded_demand)) 
 
     # Return all the predictions as a JSON response
     return json({"Predicted demands": predictions})
 
-# @app.route("/", methods=["GET"])
-# async def get_predictions(request):
-    # Print all the stored predictions as JSON to the console
-    # for prediction in all_predictions:
-    #     print(json_module.dumps(prediction))   Use Python's json module to print
+@app.route("/", methods=["GET"])
+async def get_predictions(request):
 
+
+    # print on terminal,有冇都okay
+    # for prediction in all_predictions:
+        # print(json_module.dumps(prediction))  
+    
+    # Use Python's json module to print
     # Return all the stored predictions as a JSON response
-    # return json({"All Predicted Demands": all_predictions})
+    return json({"All Predicted Demands": all_predictions})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, single_process=True)
