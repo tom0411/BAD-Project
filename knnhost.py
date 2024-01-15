@@ -3,12 +3,21 @@ from sanic.response import json
 from sanic_cors import CORS
 import joblib
 import math
+import json as json_module  # import Python's built-in json module for printing
+import warnings
+# Load the model from the file
+loaded_regressor = joblib.load('knn_regressor_model.pkl')
 
+# Suppress specific sklearn warnings
+warnings.filterwarnings(action='ignore', category=UserWarning)
 # Load the model from the file
 loaded_regressor = joblib.load('knn_regressor_model.pkl')
 
 app = Sanic("ProjectionDataReceiver")
 CORS(app)
+
+# This will store all the predictions during the session
+all_predictions = []
 
 @app.route("/", methods=["POST"])
 async def receive_data(request):
@@ -27,11 +36,20 @@ async def receive_data(request):
         predicted_demand = loaded_regressor.predict([new_data])
         rounded_demand = math.floor(predicted_demand[0])
         predictions.append(rounded_demand)
-        print("Predicted demand for {} = {}".format(new_data, rounded_demand))
+        all_predictions.append({"input": new_data, "predicted_demand": rounded_demand})
+        # print("Predicted demand = {}".format(rounded_demand))  有冇都okay
 
     # Return all the predictions as a JSON response
     return json({"Predicted demands": predictions})
 
+# @app.route("/", methods=["GET"])
+# async def get_predictions(request):
+    # Print all the stored predictions as JSON to the console
+    # for prediction in all_predictions:
+    #     print(json_module.dumps(prediction))   Use Python's json module to print
+
+    # Return all the stored predictions as a JSON response
+    # return json({"All Predicted Demands": all_predictions})
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, single_process=True)
-
