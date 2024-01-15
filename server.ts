@@ -3,7 +3,9 @@ import express from "express";
 import { env } from "./env";
 // import { client } from "./db";
 import { projectionRouter } from "./services/projection";
-import path from 'path';
+import path from "path";
+import { knex } from "./db";
+
 const app = express();
 
 app.use(express.json());
@@ -15,16 +17,31 @@ app.use(projectionRouter);
 app.use(express.static("public"));
 app.use(express.static("protected"));
 
-
 app.get("/list", async (req, res) => {
   try {
-      res.sendFile(path.join(__dirname, 'public', 'list.html'));
+    res.sendFile(path.join(__dirname, "public", "list.html"));
   } catch (err) {
     console.log(err);
     res.json({ err: "internal server error" });
   }
 });
 
+app.get("/history", async (req, res) => {
+  try {
+    let query = req.query;
+    let min = query.min;
+    let max = query.max;
+    if (!min || !max) {
+      throw new Error("Bad request");
+    }
+
+    let result = await knex("history").select("date", "holiday", "temperature", "rainfall", "demand").andWhere("id", ">=", min).andWhere("id", "<=", max);
+
+    res.json({ result: result });
+  } catch (error) {
+    res.json({ error: error });
+  }
+});
 
 // app.get("/projection", async (req, res) => {
 //   try {

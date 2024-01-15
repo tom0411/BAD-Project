@@ -1,11 +1,7 @@
-import { Client } from "pg";
-import dotenv from "dotenv";
-dotenv.config();
+import { env } from "./env";
+import Knex from "knex";
 
-export const client = new Client({
-  database: process.env.DB_NAME,
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD
-});
+let config = require("./knexfile");
+let profile = config[env.NODE_ENV];
 
-client.connect();
+export let knex = Knex(profile);

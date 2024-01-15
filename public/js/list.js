@@ -1,19 +1,49 @@
+main();
 
-onload = fetch('./js/historical_v.csv').then(res => {
-    return res.text();
-}).then(data => {
-    let result = data.split(/\r?\n|\r/).map(e => {
-        return e.split(',');
-    })
-    result.forEach(e => {
-       let m = e.map(e => {
-            return `<td>${e}</td>`;
-        }); // use '.join()' to eliminate ',' and join elements of <td>
-        let ce = document.createElement('tr');
-        for (i=3; i<=8; i++) {
-        ce.innerHTML += m[i];
-        }
-        document.querySelector('table').appendChild(ce);
-        console.log(m);
-    })
-});
+async function main() {
+  const params = new URLSearchParams(location.search);
+
+  let page = params.get("page") || 1;
+  let show = params.get("show") || 10;
+
+  let min = 1 + (page - 1) * show;
+  let max = page * show;
+
+  console.log(min, max);
+
+  const res = await fetch(`/history?min=${min}&max=${max}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
+
+  const json = await res.json();
+
+  if (!json.result) {
+    return;
+  }
+
+  let table = document.getElementById("table");
+
+  for (let result of json.result) {
+    const tr = document.createElement("tr");
+    let date = new Date(result.date);
+
+    tr.appendChild(td(date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()));
+    tr.appendChild(td(result.holiday ? "YES" : "NO"));
+    tr.appendChild(td(result.temperature));
+    tr.appendChild(td(result.rainfall));
+    tr.appendChild(td(result.demand));
+    table.appendChild(tr);
+  }
+
+  console.log(json.result);
+}
+
+function td(text) {
+  let td = document.createElement("td");
+  td.textContent = text;
+  return td;
+}
