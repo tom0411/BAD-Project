@@ -31,13 +31,30 @@ app.get("/history", async (req, res) => {
     let query = req.query;
     let min = query.min;
     let max = query.max;
+    let holiday = query.holiday;
+
     if (!min || !max) {
       throw new Error("Bad request");
     }
 
-    let result = await knex("history").select("date", "holiday", "temperature", "rainfall", "demand").andWhere("id", ">=", min).andWhere("id", "<=", max);
+    let results = await knex("history").select("date", "holiday", "temperature", "rainfall", "demand").andWhere("id", ">=", min);
 
-    res.json({ result: result });
+    let array = [];
+
+    for (let result of results) {
+      if (holiday) {
+        if (result.holiday != (holiday == "yes")) {
+          continue;
+        }
+      }
+      array.push(result);
+
+      if (array.length > +max - +min) {
+        break;
+      }
+    }
+
+    res.json({ result: array });
   } catch (error) {
     res.json({ error: error });
   }

@@ -5,13 +5,14 @@ async function main() {
 
   let page = params.get("page") || 1;
   let show = params.get("show") || 10;
+  let hoilday = params.get("hoilday") || false;
 
   let min = 1 + (page - 1) * show;
   let max = page * show;
 
   console.log(min, max);
 
-  const res = await fetch(`/history?min=${min}&max=${max}`, {
+  const res = await fetch(`/history?min=${min}&max=${max}&holiday=${hoilday}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
