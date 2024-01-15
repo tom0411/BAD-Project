@@ -157,7 +157,7 @@ async function loadTable() {
     newArrays.forEach((arr) => {
         console.log(`projected_data: ` + JSON.stringify(arr));
     });
-      
+    
 
     fetch('http://localhost:8000/', {
         method: 'POST',
