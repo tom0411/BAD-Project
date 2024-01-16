@@ -185,17 +185,72 @@ async function loadTable() {
         if (futureDay < 10) {
             futureDay = '0' + futureDay;
         }
-        if (futureMonth < 10) {
-            futureMonth = '0' + futureMonth;
-        }
+
     
         let formattedDate = futureDay + '/' + futureMonth + '/' + futureYear;
-        dateArray.push(formattedDate); // Add the formatted date to the array
-    }
-    
+        dateArray.push(formattedDate);
+        // console.log(formattedDate);
+         // Add the formatted date to the array
+        // console.log(formattedDate);
+        // Sample CSV data
+        const csvData = `Year,Month,Day,Date,Weekday,Holiday,Temperature,Rainfall,Demand
+        2023,1,17,17/1/2023,TUESDAY,FALSE,13.2,0.0,3253
+        2023,1,18,18/1/2023,WEDNESDAY,FALSE,14.3,0.0,3033
+        2023,1,19,19/1/2023,THURSDAY,FALSE,16.1,0.0,3485
+        2023,1,20,20/1/2023,FRIDAY,FALSE,17.6,0.0,3074
+        2023,1,21,21/1/2023,SATURDAY,FALSE,16.9,0.0,2394
+        2023,1,22,22/1/2023,SUNDAY,FALSE,18.8,0.6,944
+        2023,1,23,23/1/2023,MONDAY,TRUE,18.8,0.0,1229
+        2023,1,24,24/1/2023,TUESDAY,TRUE,14.7,0.3,1110
+        2023,1,25,25/1/2023,WEDNESDAY,TRUE,12.5,0.0,928
+        2023,1,26,26/1/2023,THURSDAY,FALSE,15.7,0.0,3398
+        2023,1,27,27/1/2023,FRIDAY,FALSE,15.4,0.0,3400
+        2023,1,28,28/1/2023,SATURDAY,FALSE,12.9,0.0,2151
+        `;
+// Parse the CSV data into an array of objects
+const parseCSV = (csv) => {
+  const rows = csv.split('\n');
+  const headers = rows[0].split(',');
+  const data = rows.slice(1).map(row => {
+    const rowData = row.split(',');
+    const obj = {};
+    headers.forEach((header, i) => {
+      obj[header] = rowData[i];
+    });
+    return obj;
+  });
+  return data;
+}
+
+const dataObjects = parseCSV(csvData);
+
+const findDemandForDate = (data, date) => {
+    const result = data.find(item => item.Date === date);
+    // Convert the Demand string to a number using parseInt or parseFloat
+    return result ? parseFloat(result.Demand) : null; // or parseInt(result.Demand), if Demand is an integer
+  };
+//   console.log(findDemandForDate);
+
+// Example usage
+
+// console.log(dateToSearch);
+
+
+// console.log( demandForDate);
+var demandArray = [];
+
+for (const date of dateArray) {
+  const demandForDate = findDemandForDate(dataObjects, date);
+  demandArray.push(demandForDate);
+}
+
+// console.log(demandArray);
+
+}
+
     // Now pass the dynamically generated dateArray to the function
     addRowToSecondTable('Date', dateArray);
-    addRowToSecondTable('Amount', ['Data 1', 'Data 2', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
+    addRowToSecondTable('Amount',demandArray);
     addRowToSecondTable('Increase/Decrease', ['Data 4', 'Data 5', 'Data 6', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
     
   
@@ -276,42 +331,3 @@ loop('Condition','forecastWeather');
 loop('Rainfall_Array','PSR');
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-onload = fetch('./js/historical_v.csv').then(res => {
-    return res.text();
-}).then(data => {
-    let result = data.split(/\r?\n|\r/).map(e => {
-        return e.split(',');
-    })
-    result.forEach(e => {
-        let m = e.map(e => {
-            return `<td>${e}</td>`;
-        }); // use '.join()' to eliminate ',' and join elements of <td>
-        let ce = document.createElement('tr');
-        for (i=3; i<=8; i++) {
-        ce.innerHTML += m[i];
-        }
-        document.getElementById('fromCSV').appendChild(ce);
-        console.log(m);
-    })
-});
