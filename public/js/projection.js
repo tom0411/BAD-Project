@@ -16,7 +16,7 @@ async function loadTable() {
     let res = await fetch(`/general/forecast`);
     let fetchData = await res.json();
   
-    console.log(fetchData.weatherForecast);
+
   
 
     let tbody = document.querySelector('tbody') || document.body.appendChild(document.createElement('tbody'));
@@ -24,6 +24,7 @@ async function loadTable() {
     let Rainfall_Array = [];
     let Temperature_Array = [];
     let PublicHoliday_Array = [];
+
     let DateRow = document.createElement('tr');
     let LeftCell1 = document.createElement('td');
     LeftCell1.textContent = 'Date'; // This can be a header or some data
@@ -144,6 +145,7 @@ async function loadTable() {
     }
 
     // Print the arrays
+    // console.log(fetchData.weatherForecast);
     // console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
     // console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
     // console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
@@ -152,7 +154,41 @@ async function loadTable() {
     //     console.log(`projected_data: ` + JSON.stringify(arr));
     // });
       
+    let secondTableBody = document.getElementById('secondTableBody');
 
+    // Example function to add rows to the second table
+    function addRowToSecondTable(header, data) {
+        let row = document.createElement('tr');
+        let headerCell = document.createElement('td');
+        headerCell.textContent = header;
+        row.appendChild(headerCell);
+    
+        for (let value of data) {
+            let cell = document.createElement('td');
+            cell.textContent = value;
+            row.appendChild(cell);
+        }
+        secondTableBody.appendChild(row);
+    }
+    let currentDate = new Date();
+    let day = currentDate.getDate()+1;
+    let month = currentDate.getMonth() + 1; // Month is zero-based, so we add 1
+    let year = currentDate.getFullYear();
+    
+    // Ensure leading zero for day and month if needed
+    if (day < 10) {
+      day = '0' + day;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+    
+    console.log(day + '/' + month + '/' + year);
+    // Example usage
+    addRowToSecondTable('Date', ['Data 1', 'Data 2', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
+    addRowToSecondTable('Amount', ['Data 1', 'Data 2', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
+    addRowToSecondTable('Increase/Decrease', ['Data 4', 'Data 5', 'Data 6', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
+    
   
 
 // Assuming 'tbody' is already defined and is the correct <tbody> element of your table
@@ -205,6 +241,8 @@ fetch('http://localhost:8000/', {
 // });
 }
 loadTable();
+
+
     // ... (Any additional code)
 
 /*
