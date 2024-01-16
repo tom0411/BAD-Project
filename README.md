@@ -1,3 +1,3 @@
 pip freeze > requirements.txt
-.venv\Scripts\Activate
+source .pyenv/bin/activate
 python knnhost.py
