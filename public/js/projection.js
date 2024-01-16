@@ -154,9 +154,6 @@ async function loadTable() {
     //     console.log(`projected_data: ` + JSON.stringify(arr));
     // });
       
-    let secondTableBody = document.getElementById('secondTableBody');
-
-    // Example function to add rows to the second table
     function addRowToSecondTable(header, data) {
         let row = document.createElement('tr');
         let headerCell = document.createElement('td');
@@ -168,24 +165,36 @@ async function loadTable() {
             cell.textContent = value;
             row.appendChild(cell);
         }
+        // Make sure secondTableBody is a defined reference to the tbody element in your second table
         secondTableBody.appendChild(row);
     }
+    
     let currentDate = new Date();
-    let day = currentDate.getDate()+1;
+    let day = currentDate.getDate() + 1; // Get tomorrow's date
     let month = currentDate.getMonth() + 1; // Month is zero-based, so we add 1
-    let year = currentDate.getFullYear();
+    let year = currentDate.getFullYear()-1;
     
-    // Ensure leading zero for day and month if needed
-    if (day < 10) {
-      day = '0' + day;
-    }
-    if (month < 10) {
-      month = '0' + month;
+    let dateArray = []; // Initialize an empty array to store the future dates
+    
+    for (let i = 0; i < 9; i++) {
+        let futureDate = new Date(year, month - 1, day + i); // Calculate the future date
+        let futureDay = futureDate.getDate();
+        let futureMonth = futureDate.getMonth() + 1; // Month is zero-based, so we add 1
+        let futureYear = futureDate.getFullYear();
+    
+        if (futureDay < 10) {
+            futureDay = '0' + futureDay;
+        }
+        if (futureMonth < 10) {
+            futureMonth = '0' + futureMonth;
+        }
+    
+        let formattedDate = futureDay + '/' + futureMonth + '/' + futureYear;
+        dateArray.push(formattedDate); // Add the formatted date to the array
     }
     
-    console.log(day + '/' + month + '/' + year);
-    // Example usage
-    addRowToSecondTable('Date', ['Data 1', 'Data 2', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
+    // Now pass the dynamically generated dateArray to the function
+    addRowToSecondTable('Date', dateArray);
     addRowToSecondTable('Amount', ['Data 1', 'Data 2', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
     addRowToSecondTable('Increase/Decrease', ['Data 4', 'Data 5', 'Data 6', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
     
