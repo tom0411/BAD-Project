@@ -16,7 +16,7 @@ async function loadTable() {
     let res = await fetch(`/general/forecast`);
     let fetchData = await res.json();
   
-    console.log(fetchData.weatherForecast);
+
   
 
     let tbody = document.querySelector('tbody') || document.body.appendChild(document.createElement('tbody'));
@@ -24,6 +24,7 @@ async function loadTable() {
     let Rainfall_Array = [];
     let Temperature_Array = [];
     let PublicHoliday_Array = [];
+
     let DateRow = document.createElement('tr');
     let LeftCell1 = document.createElement('td');
     LeftCell1.textContent = 'Date'; // This can be a header or some data
@@ -79,15 +80,15 @@ async function loadTable() {
         RainRow.appendChild(item);
     
         if (item.textContent === 'Low') {
-            Rainfall_Array.push(Math.round(Math.random() * 5));  // Add a random number between 0 and 5 to the Rainfall_Array array
+            Rainfall_Array.push(0);  // Low is 0
         } else if (item.textContent === 'Medium Low') {
-            Rainfall_Array.push(Math.round(Math.random() * 3.3)); // Add a random number between 0 and 3.3 to the Rainfall_Array array
+            Rainfall_Array.push(Math.round(Math.random() * 3.3)); // Medium Low is 0 to 3.3
         } else if (item.textContent === 'Medium') {
-            Rainfall_Array.push(Math.round(Math.random() * 3.3 + 3.3)); // Add a random number between 3.3 and 6.6 to the Rainfall_Array array
+            Rainfall_Array.push(Math.round(Math.random() * 3.3 + 3.3)); // Medium is 3.3 to 6.6
         } else if (item.textContent === 'Medium High') {
-            Rainfall_Array.push(Math.round(Math.random() * (77 - 31.7) + 31.7)); // Add a random number between 31.7 and 77 to the Rainfall_Array array
+            Rainfall_Array.push(Math.round(Math.random() * (77 - 31.7) + 31.7)); // Medium High is 31.7 to 77
         } else if (item.textContent === 'High') {
-            Rainfall_Array.push(Math.round(Math.random() * 77)); // Add a random number between 0 and 77 to the Rainfall_Array array
+            Rainfall_Array.push(Math.round(Math.random() * (100 - 77) + 77)); // High is 77 to 100
         }
    
         tbody.appendChild(RainRow);
@@ -103,11 +104,11 @@ async function loadTable() {
     for (let days of fetchData.weatherForecast) {
         let item = document.createElement('td');
         if (holiday.includes(days.forecastDate)) {
-            item.textContent = 'True'; // Capitalize the first letter
+            item.textContent = 'Yes'; // Capitalize the first letter
             PublicHoliday_Array.push(1);
             phRow.appendChild(item);
         } else {
-            item.textContent = 'False'; // Capitalize the first letter
+            item.textContent = 'No'; // Capitalize the first letter
             phRow.appendChild(item);
             PublicHoliday_Array.push(0);
         }
@@ -129,10 +130,7 @@ async function loadTable() {
 
 
     //console.log the varible array
-    console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
-    console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
-    console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
-    console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array))
+
     const newArrays = [];
     for (let i = 0; i < fetchData.weatherForecast.length; i++) {
         if (Weekday_Array.length > i && Temperature_Array.length > i &&
@@ -146,12 +144,60 @@ async function loadTable() {
         }
     }
 
-    // Log the new arrays
-    newArrays.forEach((arr) => {
-        console.log(`projected_data: ` + JSON.stringify(arr));
-    });
+    // Print the arrays
+    // console.log(fetchData.weatherForecast);
+    // console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
+    // console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
+    // console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
+    // console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array))
+    // newArrays.forEach((arr) => {
+    //     console.log(`projected_data: ` + JSON.stringify(arr));
+    // });
+      
+    function addRowToSecondTable(header, data) {
+        let row = document.createElement('tr');
+        let headerCell = document.createElement('td');
+        headerCell.textContent = header;
+        row.appendChild(headerCell);
     
-
+        for (let value of data) {
+            let cell = document.createElement('td');
+            cell.textContent = value;
+            row.appendChild(cell);
+        }
+        // Make sure secondTableBody is a defined reference to the tbody element in your second table
+        secondTableBody.appendChild(row);
+    }
+    
+    let currentDate = new Date();
+    let day = currentDate.getDate() + 1; // Get tomorrow's date
+    let month = currentDate.getMonth() + 1; // Month is zero-based, so we add 1
+    let year = currentDate.getFullYear()-1;
+    
+    let dateArray = []; // Initialize an empty array to store the future dates
+    
+    for (let i = 0; i < 9; i++) {
+        let futureDate = new Date(year, month - 1, day + i); // Calculate the future date
+        let futureDay = futureDate.getDate();
+        let futureMonth = futureDate.getMonth() + 1; // Month is zero-based, so we add 1
+        let futureYear = futureDate.getFullYear();
+    
+        if (futureDay < 10) {
+            futureDay = '0' + futureDay;
+        }
+        if (futureMonth < 10) {
+            futureMonth = '0' + futureMonth;
+        }
+    
+        let formattedDate = futureDay + '/' + futureMonth + '/' + futureYear;
+        dateArray.push(formattedDate); // Add the formatted date to the array
+    }
+    
+    // Now pass the dynamically generated dateArray to the function
+    addRowToSecondTable('Date', dateArray);
+    addRowToSecondTable('Amount', ['Data 1', 'Data 2', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
+    addRowToSecondTable('Increase/Decrease', ['Data 4', 'Data 5', 'Data 6', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
+    
   
 
 // Assuming 'tbody' is already defined and is the correct <tbody> element of your table
@@ -204,6 +250,8 @@ fetch('http://localhost:8000/', {
 // });
 }
 loadTable();
+
+
     // ... (Any additional code)
 
 /*
