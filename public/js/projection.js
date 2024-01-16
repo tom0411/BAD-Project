@@ -79,15 +79,15 @@ async function loadTable() {
         RainRow.appendChild(item);
     
         if (item.textContent === 'Low') {
-            Rainfall_Array.push(Math.round(Math.random() * 5));  // Add a random number between 0 and 5 to the Rainfall_Array array
+            Rainfall_Array.push(0);  // Low is 0
         } else if (item.textContent === 'Medium Low') {
-            Rainfall_Array.push(Math.round(Math.random() * 3.3)); // Add a random number between 0 and 3.3 to the Rainfall_Array array
+            Rainfall_Array.push(Math.round(Math.random() * 3.3)); // Medium Low is 0 to 3.3
         } else if (item.textContent === 'Medium') {
-            Rainfall_Array.push(Math.round(Math.random() * 3.3 + 3.3)); // Add a random number between 3.3 and 6.6 to the Rainfall_Array array
+            Rainfall_Array.push(Math.round(Math.random() * 3.3 + 3.3)); // Medium is 3.3 to 6.6
         } else if (item.textContent === 'Medium High') {
-            Rainfall_Array.push(Math.round(Math.random() * (77 - 31.7) + 31.7)); // Add a random number between 31.7 and 77 to the Rainfall_Array array
+            Rainfall_Array.push(Math.round(Math.random() * (77 - 31.7) + 31.7)); // Medium High is 31.7 to 77
         } else if (item.textContent === 'High') {
-            Rainfall_Array.push(Math.round(Math.random() * 77)); // Add a random number between 0 and 77 to the Rainfall_Array array
+            Rainfall_Array.push(Math.round(Math.random() * (100 - 77) + 77)); // High is 77 to 100
         }
    
         tbody.appendChild(RainRow);
@@ -103,11 +103,11 @@ async function loadTable() {
     for (let days of fetchData.weatherForecast) {
         let item = document.createElement('td');
         if (holiday.includes(days.forecastDate)) {
-            item.textContent = 'True'; // Capitalize the first letter
+            item.textContent = 'Yes'; // Capitalize the first letter
             PublicHoliday_Array.push(1);
             phRow.appendChild(item);
         } else {
-            item.textContent = 'False'; // Capitalize the first letter
+            item.textContent = 'No'; // Capitalize the first letter
             phRow.appendChild(item);
             PublicHoliday_Array.push(0);
         }
@@ -129,10 +129,7 @@ async function loadTable() {
 
 
     //console.log the varible array
-    console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
-    console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
-    console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
-    console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array))
+
     const newArrays = [];
     for (let i = 0; i < fetchData.weatherForecast.length; i++) {
         if (Weekday_Array.length > i && Temperature_Array.length > i &&
@@ -146,10 +143,14 @@ async function loadTable() {
         }
     }
 
-    // Log the new arrays
-    newArrays.forEach((arr) => {
-        console.log(`projected_data: ` + JSON.stringify(arr));
-    });
+    // Print the arrays
+    // console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
+    // console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
+    // console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
+    // console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array))
+    // newArrays.forEach((arr) => {
+    //     console.log(`projected_data: ` + JSON.stringify(arr));
+    // });
       
 
   
