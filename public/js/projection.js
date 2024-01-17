@@ -294,18 +294,18 @@ if (array1.length === array2.length) {
         percentageDifferences.push(percentageDifference+'%');
         
         // Log the message showing whether the prediction is higher or lower
-        if (difference > 0) {
-            console.log(`Prediction is ${percentageDifference}% higher than demand. Prediction: ${array1[i]}, Demand: ${array2[i]}`);
-        } else if (difference < 0) {
-            console.log(`Prediction is ${percentageDifference}% lower than demand. Prediction: ${array1[i]}, Demand: ${array2[i]}`);
-        } else {
-            console.log(`Prediction equals demand. Prediction: ${array1[i]}, Demand: ${array2[i]}`);
-        }
+        // if (difference > 0) {
+        //     console.log(`Prediction is ${percentageDifference}% higher than demand. Prediction: ${array1[i]}, Demand: ${array2[i]}`);
+        // } else if (difference < 0) {
+        //     console.log(`Prediction is ${percentageDifference}% lower than demand. Prediction: ${array1[i]}, Demand: ${array2[i]}`);
+        // } else {
+        //     console.log(`Prediction equals demand. Prediction: ${array1[i]}, Demand: ${array2[i]}`);
+        // }
     }
 }
 
 // If needed, you can now use the percentageDifferences array elsewhere in your code
-console.log(percentageDifferences);
+
     // Print the arrays
     // console.log(fetchData.weatherForecast);
     // console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
@@ -315,8 +315,9 @@ console.log(percentageDifferences);
     // newArrays.forEach((arr) => {
     //     console.log(`projected_data: ` + JSON.stringify(arr));
     // });
-    console.log(predictionArray);
-    console.log(demandArray);
+    // console.log(percentageDifferences);
+    // console.log(predictionArray);
+    // console.log(demandArray);
     // Now pass the dynamically generated dateArray to the function
     addRowToSecondTable('Date', dateArray);
     addRowToSecondTable('Amount',demandArray);
