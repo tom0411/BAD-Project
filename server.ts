@@ -60,7 +60,7 @@ app.get("/history", async (req, res) => {
   }
 });
 
-app.get("/projection", async (req, res) => {
+app.get("/projection.html", async (req, res) => {
   try {
     res.sendFile(path.join(__dirname, 'public', 'projection.html'));
   } catch (err) {
