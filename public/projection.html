@@ -97,6 +97,11 @@
         margin-left: 10px; /* Adjust this value as needed */
         /* Add any other styles you want to apply to the "projectionclass" here */
       }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
     </style>
 
     <!-- Custom styles for this template -->
@@ -310,17 +315,17 @@
           </table>
           <h4>Predicted Amount comparison with last year</h4>
           <table class="table table-hover table-dark">
-              <tbody id="secondTableBody">
-                  <!-- Table rows will be inserted here by your JavaScript -->
-              </tbody>
+            <tbody id="secondTableBody">
+
+              
+            </tbody>
           </table>
         </div>
       </div>
-
     </main>
-    
-    <div style='margin: 3rem; display: block;'>
-      <table id='fromCSV'></table>
+
+    <div style="margin: 3rem; display: block">
+      <table id="fromCSV"></table>
     </div>
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
