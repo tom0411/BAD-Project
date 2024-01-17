@@ -145,12 +145,12 @@ async function loadTable() {
         }
     }
 
-      
+    
    
 // Assuming 'tbody' is already defined and is the correct <tbody> element of your table
 // Replace with your actual tbody selector
-
-fetch('http://localhost:8000/', {
+// http://localhost:8000/
+fetch('https://ai.impetus-go.me/', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
