@@ -320,7 +320,7 @@ console.log(percentageDifferences);
     // Now pass the dynamically generated dateArray to the function
     addRowToSecondTable('Date', dateArray);
     addRowToSecondTable('Amount',demandArray);
-    addRowToSecondTable('Increase/Decrease', percentageDifferences);
+    addRowToSecondTable('+/- Rate', percentageDifferences);
 
   
 })
