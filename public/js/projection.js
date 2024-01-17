@@ -144,16 +144,49 @@ async function loadTable() {
         }
     }
 
-    // Print the arrays
-    // console.log(fetchData.weatherForecast);
-    // console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
-    // console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
-    // console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
-    // console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array))
-    // newArrays.forEach((arr) => {
-    //     console.log(`projected_data: ` + JSON.stringify(arr));
-    // });
       
+   
+// Assuming 'tbody' is already defined and is the correct <tbody> element of your table
+// Replace with your actual tbody selector
+
+fetch('http://localhost:8000/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newArrays) // Make sure newArrays is defined and holds the data you want to send
+})
+.then(response => response.json()) // Parse the JSON from the response
+.then(data => {
+    // Access the "Predicted demands" property of the object and print it
+    if (data && Array.isArray(data["Predicted demands"])) {
+        // Log the array from the "Predicted demands" property
+       
+
+        // Your predicted data array
+        var predictionArray = data["Predicted demands"];
+        
+        // Create a new table row for predictions
+        let PredictRow = document.createElement('tr');
+
+        // Add a header or label cell to the row
+        let headerCell = document.createElement('td');
+        headerCell.textContent = 'Predicted Amount';
+        PredictRow.appendChild(headerCell);
+
+        // Loop through the predictions array
+        for (let predictedValue of predictionArray) {
+            // Create a new cell for the current predicted value
+            let cell = document.createElement('td');
+            cell.textContent = predictedValue;
+            PredictRow.appendChild(cell); // Append the cell to the PredictRow
+        }
+
+        // Append the new row to the table body
+        tbody.appendChild(PredictRow);
+    } else {
+        console.log("No 'Predicted demands' array found or the property is not an array.");
+    }
     function addRowToSecondTable(header, data) {
         let row = document.createElement('tr');
         let headerCell = document.createElement('td');
@@ -244,58 +277,52 @@ for (const date of dateArray) {
   demandArray.push(demandForDate);
 }
 
-// console.log(demandArray);
+
 
 }
+let array1 = predictionArray;
+let array2 = demandArray;
+let percentageDifferences = []; // New array to hold the percentage differences
 
+if (array1.length === array2.length) {
+    for (let i = 0; i < array1.length; i++) {
+        let difference = (array1[i] - array2[i]) / array2[i];
+        let percentageDifference = difference * 100;
+        percentageDifference = percentageDifference.toFixed(2); // rounding off to 2 decimal places
+        
+        // Push the percentage difference to the array
+        percentageDifferences.push(percentageDifference+'%');
+        
+        // Log the message showing whether the prediction is higher or lower
+        if (difference > 0) {
+            console.log(`Prediction is ${percentageDifference}% higher than demand. Prediction: ${array1[i]}, Demand: ${array2[i]}`);
+        } else if (difference < 0) {
+            console.log(`Prediction is ${percentageDifference}% lower than demand. Prediction: ${array1[i]}, Demand: ${array2[i]}`);
+        } else {
+            console.log(`Prediction equals demand. Prediction: ${array1[i]}, Demand: ${array2[i]}`);
+        }
+    }
+}
+
+// If needed, you can now use the percentageDifferences array elsewhere in your code
+console.log(percentageDifferences);
+    // Print the arrays
+    // console.log(fetchData.weatherForecast);
+    // console.log('Weekday_Array: ' + JSON.stringify(Weekday_Array));
+    // console.log('Temperature_Array: ' + JSON.stringify(Temperature_Array));
+    // console.log('Rainfall_Array: '+ JSON.stringify(Rainfall_Array))
+    // console.log('PublicHoliday_Array: '+ JSON.stringify(PublicHoliday_Array))
+    // newArrays.forEach((arr) => {
+    //     console.log(`projected_data: ` + JSON.stringify(arr));
+    // });
+    console.log(predictionArray);
+    console.log(demandArray);
     // Now pass the dynamically generated dateArray to the function
     addRowToSecondTable('Date', dateArray);
     addRowToSecondTable('Amount',demandArray);
-    addRowToSecondTable('Increase/Decrease', ['Data 4', 'Data 5', 'Data 6', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3', 'Data 3']);
-    
+    addRowToSecondTable('Increase/Decrease', percentageDifferences);
+
   
-
-// Assuming 'tbody' is already defined and is the correct <tbody> element of your table
-// Replace with your actual tbody selector
-
-fetch('http://localhost:8000/', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(newArrays) // Make sure newArrays is defined and holds the data you want to send
-})
-.then(response => response.json()) // Parse the JSON from the response
-.then(data => {
-    // Access the "Predicted demands" property of the object and print it
-    if (data && Array.isArray(data["Predicted demands"])) {
-        // Log the array from the "Predicted demands" property
-        console.log(data["Predicted demands"]);
-
-        // Your predicted data array
-        let predictions = data["Predicted demands"];
-
-        // Create a new table row for predictions
-        let PredictRow = document.createElement('tr');
-
-        // Add a header or label cell to the row
-        let headerCell = document.createElement('td');
-        headerCell.textContent = 'Predicted Amount';
-        PredictRow.appendChild(headerCell);
-
-        // Loop through the predictions array
-        for (let predictedValue of predictions) {
-            // Create a new cell for the current predicted value
-            let cell = document.createElement('td');
-            cell.textContent = predictedValue;
-            PredictRow.appendChild(cell); // Append the cell to the PredictRow
-        }
-
-        // Append the new row to the table body
-        tbody.appendChild(PredictRow);
-    } else {
-        console.log("No 'Predicted demands' array found or the property is not an array.");
-    }
 })
 .catch(error => {
     console.error('Error:', error);
@@ -303,6 +330,8 @@ fetch('http://localhost:8000/', {
 // .catch(error => {
 //     console.error('There was a problem with the fetch operation:', error);
 // });
+
+
 }
 loadTable();
 
