@@ -23,7 +23,7 @@
     <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
-      .bd-placeholder-img {
+                .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
         -webkit-user-select: none;
@@ -100,11 +100,9 @@
 
     /* Add any other styles you want to apply to the "projectionclass" here */
   }
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-      }
+
+#outside{
+        height: 100%;}
       .carousel-indicators {
   /* Adjust the position of the carousel indicators */
   /* Example: move the indicators to the right */
@@ -132,8 +130,9 @@
   /* Adjust the position of the carousel inner container */
   /* Example: set a specific width and height for the carousel inner container */
   width: 100%;
-  height: 700px;
+  height: 500px;
   position: relative;
+
 }
 
 .carousel-item img {
@@ -161,11 +160,16 @@
   }
 
   .board {
-    margin: 100px;
-    align-items: center;
+    margin-left: 30%;
   }
 
-
+.element{
+  height: 100%;
+}
+.container {
+  height: 400px;
+  overflow: auto; /* Enable scrolling */
+}
 
     </style>
 
@@ -285,11 +289,11 @@
     <main>
       <h1 class="visually-hidden">Japan</h1>
 
-<div>
+
   <div id="outside">
       <div
         class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
-        style="width: 25%;"
+        style="width: 280px;"
       
       >
         <a
@@ -370,19 +374,14 @@
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li>
               <hr class="dropdown-divider" />
-            </li>
+            </li>container
             <li><a class="dropdown-item" href="#">Sign out</a></li>
           </ul>
         </div>
       </div>
-      <div class="board">
-        <a href="https://www.tamagoya.co.jp/" style="font-size: 2rem;">玉子屋公式チャンネル</a>
-        <iframe width="400" height="300" src="https://www.youtube.com/embed/cnM3BZ9Ri6k" title="年賺180億的史上最強便當店！老闆長超凶每天只願意做一道菜，成功秘訣竟然是好到變態的外送服務？#外送 #便當 #美食 #經典 #服務 #營銷" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-    </div>
-    
-      <div class="projectiontable" style="width: 80%">
-        <div>
+      <div>     
+         <div class="projectiontable" style="width: 80%">
+        
           <h1>Welcome to selling projection page </h1>
           <h5>*Powered by future generation AI model </h5>
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -393,13 +392,13 @@
             </ol>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img class="d-block w-40" style=" height: 750px;"src="js/delivery-driver-car.jpg" alt="First slide">
+                <img class="d-block w-40" style="width: 1000px ; height: 550px;"src="js/delivery-driver-car.jpg" alt="First slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block w-40" style=" height: 750px;"src="js/360_F_394737308_A5IJf7vijvkGWCsiCcNI1kAGWoa5g54h.jpg" alt="First slide">
+                <img class="d-block w-40" style=" width: 1000px ;height: 550px;"src="js/360_F_394737308_A5IJf7vijvkGWCsiCcNI1kAGWoa5g54h.jpg" alt="First slide">
               </div>
               <div class="carousel-item">
-                <img class="d-block w-40" style=" height: 750px;"src="js/a-deliveroo-rider-delivering-an-order.jpeg" alt="First slide">
+                <img class="d-block w-40" style=" width: 1000px ;height: 550px;"src="js/a-deliveroo-rider-delivering-an-order.jpeg" alt="First slide">
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -411,13 +410,21 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
+          <a href="https://www.tamagoya.co.jp/" style="font-size: 2rem;">玉子屋公式チャンネル</a>
+      <div class="board">
+       
+        <iframe width="400" height="300" src="https://www.youtube.com/embed/cnM3BZ9Ri6k" title="年賺180億的史上最強便當店！老闆長超凶每天只願意做一道菜，成功秘訣竟然是好到變態的外送服務？#外送 #便當 #美食 #經典 #服務 #營銷" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+
+        
+    </div>
+    
+
         </div>
         </div>
       </div>
     </main>
-    <div style="margin: 3rem; display: block">
-      <table id="fromCSV"></table>
-    </div>
+
     <!-- Latest CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
