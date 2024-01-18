@@ -69,6 +69,18 @@ app.get("/projection.html", async (req, res) => {
   }
 });
 
+app.get("/record", async (req, res) => {
+  try {
+    res.sendFile(path.join(__dirname, "public", "record.html"));
+  } catch (err) {
+    console.log(err);
+    res.json({ err: "internal server error" });
+  }
+});
+
+
+
+
 app.use((req, res) => {
   res.status(404).json({ err: "Not Found" });
 });

@@ -254,7 +254,7 @@
             </a>
           </li>
           <li>
-            <a href="projection.html" class="nav-link active text-white">
+            <a href="projection.html" class="nav-link text-white">
               <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#speedometer2" />
               </svg>
@@ -270,7 +270,7 @@
             </a>
           </li>
           <li>
-            <a href="/record.html" class="nav-link text-white">
+            <a href="record.html" class="nav-link text-white">
               <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#grid" />
               </svg>
@@ -315,32 +315,37 @@
         </div>
       </div>
       <div class="projectiontable" style="width: 80%">
-        <div>
-          <h4>Projection for next 9 days</h4>
-
-          <table class="table table-hover table-dark">
-            <tbody>
-              <!-- Table rows will be inserted here by your JavaScript -->
-            </tbody>
-          </table>
-          <h4>Predicted Amount comparison with last year</h4>
-          <table class="table table-hover table-dark">
-            <tbody id="secondTableBody">
-
-              
-            </tbody>
-          </table>
+        <div style="margin-left: 5rem;">
+          <h2 style="margin: 2rem 0 2rem 0;">Historical Data Since 2020</h2>
+          <table id="fromCSV"></table>
         </div>
       </div>
     </main>
 
-    <div style="margin: 3rem; display: block">
-      <table id="fromCSV"></table>
-    </div>
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="sidebars.js"></script>
-    <script src="./js/projection.js"></script>
+    <script>
+      onload = fetch('js/historical_v.csv').then(res => {
+          return res.text();
+      }).then(data => {
+          let result = data.split(/\r?\n|\r/).map(e => {
+              return e.split(',');
+          })
+          result.forEach(e => {
+            let m = e.map(e => {
+                return `<td>${e}</td>`;
+            }); // use '.join()' to eliminate ',' and join elements of <td>
+            let ce = document.createElement('tr');
+            for (i=3; i<=8; i++) {
+            ce.innerHTML += m[i];
+            }
+            document.getElementById('fromCSV').appendChild(ce);
+            console.log(m);
+        })
+      });
+
+    </script>
   </body>
 </html>
