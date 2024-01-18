@@ -9,7 +9,7 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Hugo 0.84.0" />
-    <title>玉子燒</title>
+    <title>玉子屋</title>
 
     <link
       rel="canonical"
@@ -102,6 +102,17 @@
         height: 100%;
         margin: 0;
       }
+
+      #crop {
+        width: 215px;
+        height: 80px;
+        overflow: hidden;
+      }
+      #crop img {
+        width: 350px;
+        /* height: 60px; */
+        margin: 12px 0px 15px 10px;
+    }
     </style>
 
     <!-- Custom styles for this template -->
@@ -111,7 +122,7 @@
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
       <symbol id="bootstrap" viewBox="0 0 118 94">
-        <title>Company</title>
+        <title>玉子屋</title>
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -228,23 +239,22 @@
           href="/"
           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
         >
-          <svg class="bi me-2" width="40" height="32">
-            <use xlink:href="#bootstrap" />
-          </svg>
-          <span class="fs-4">Company</span>
+            <span id="crop" style="background-color: orange;">
+            <img src="https://www.tamagoya.co.jp/wp-content/themes/thema/img/common/logo.svg"></span>
+          <span class="fs-4"></span>
         </a>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
+            <a href="/" class="nav-link text-white" aria-current="page">
               <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#home" />
               </svg>
-              Home
+              Resource
             </a>
           </li>
           <li>
-            <a href="projection.html" class="nav-link text-white">
+            <a href="projection.html" class="nav-link active text-white">
               <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#speedometer2" />
               </svg>
@@ -264,7 +274,7 @@
               <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#grid" />
               </svg>
-              Products
+              History
             </a>
           </li>
           <li>

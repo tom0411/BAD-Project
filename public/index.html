@@ -9,7 +9,7 @@
       content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
     />
     <meta name="generator" content="Hugo 0.84.0" />
-    <title>玉子燒</title>
+    <title>玉子屋</title>
 
     <link
       rel="canonical"
@@ -143,6 +143,26 @@
   height: 100%;
   object-fit: cover;
 }
+  #crop {
+          width: 215px;
+          height: 80px;
+          overflow: hidden;
+        }
+  #crop img {
+          width: 350px;
+          /* height: 60px; */
+          margin: 12px 0px 15px 10px;
+  }
+
+  #outside {
+    display: flex;
+  }
+
+  .board {
+    margin: 100px;
+  }
+
+
 
     </style>
 
@@ -151,9 +171,9 @@
   </head>
 
   <body>
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+    <svg xmlns="./logo.svg" style="display: none">
       <symbol id="bootstrap" viewBox="0 0 118 94">
-        <title>Company</title>
+        <title>玉子屋</title>
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -260,21 +280,26 @@
     </svg>
 
     <main>
-      <h1 class="visually-hidden">Sidebars examples</h1>
+      <h1 class="visually-hidden">Japan</h1>
+
 <div>
+  <div id="outside">
       <div
         class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
-        style="width: 100%"
+        style="width: 25%;"
       
       >
         <a
           href="/"
           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
         >
-          <svg class="bi me-2" width="40" height="32">
+          <!-- <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap" />
-          </svg>
-          <span class="fs-4">Company</span>
+          </svg> -->
+          <span id="crop" style="background-color: orange;">
+            <img src="https://www.tamagoya.co.jp/wp-content/themes/thema/img/common/logo.svg"></span>
+
+          <span class="fs-4"></span>
         </a>
         <hr />
         <ul class="nav nav-pills flex-column mb-auto">
@@ -283,7 +308,7 @@
               <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#home" />
               </svg>
-              Home
+              Resource
             </a>
           </li>
           <li>
@@ -307,7 +332,7 @@
               <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#grid" />
               </svg>
-              Products
+              History
             </a>
           </li>
           <li>
@@ -347,6 +372,12 @@
           </ul>
         </div>
       </div>
+      <div class="board">
+        <a href="https://www.tamagoya.co.jp/" style="font-size: 2rem;">玉子屋公式チャンネル</a>
+        <iframe width="400" height="300" src="https://www.youtube.com/embed/cnM3BZ9Ri6k" title="年賺180億的史上最強便當店！老闆長超凶每天只願意做一道菜，成功秘訣竟然是好到變態的外送服務？#外送 #便當 #美食 #經典 #服務 #營銷" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+    
       <div class="projectiontable" style="width: 80%">
         <div>
           <h1>Welcome to selling projection page </h1>
@@ -381,7 +412,6 @@
         </div>
       </div>
     </main>
-
     <div style="margin: 3rem; display: block">
       <table id="fromCSV"></table>
     </div>
