@@ -96,7 +96,10 @@
         margin-top: 10px;
         margin-left: 10px; /* Adjust this value as needed */
         /* Add any other styles you want to apply to the "projectionclass" here */
+        overflow: scroll;
+        height: 100%;
       }
+
       html,
       body {
         height: 100%;
@@ -113,6 +116,12 @@
         /* height: 60px; */
         margin: 12px 0px 15px 10px;
     }
+
+    h2 {
+      position: sticky;
+      display: flex;
+    }
+
     </style>
 
     <!-- Custom styles for this template -->
@@ -120,6 +129,8 @@
   </head>
 
   <body>
+    <main>
+
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
       <symbol id="bootstrap" viewBox="0 0 118 94">
         <title>玉子屋</title>
@@ -228,15 +239,13 @@
       </symbol>
     </svg>
 
-    <main>
-      <h1 class="visually-hidden">Sidebars examples</h1>
 
       <div
         class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
-        style="width: 280px"
+        style="width: 280px; height: 100%;"
       >
         <a
-          href="/"
+          href="index.html"
           class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
         >
             <span id="crop" style="background-color: orange;">
@@ -320,7 +329,8 @@
           <table id="fromCSV"></table>
         </div>
       </div>
-    </main>
+
+      </main>
 
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

@@ -5,17 +5,42 @@ import { env } from "./env";
 import { projectionRouter } from "./services/projection";
 import path from "path";
 import { knex } from "./db";
+import { sessionMiddleware } from "./session";
+
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded());
 
+
+app.get("/", (req, res, next) => {
+    if (req.url === "/"){ // && !req.session.username) {
+        let file = path.resolve("public", "index.html");
+        res.sendFile(file);
+        return;
+    }
+    next();
+});
+
+
+
 app.use(projectionRouter);
 
 // Serve static files from 'public' directory
 app.use(express.static("public"));
 app.use(express.static("protected"));
+
+
+app.get("/resource", async (req, res) => {
+  try {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+  } catch (err) {
+    console.log(err);
+    res.json({ err: "internal server error" });
+  }
+});
+
 
 app.get("/list", async (req, res) => {
   try {

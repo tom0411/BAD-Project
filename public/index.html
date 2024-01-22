@@ -93,25 +93,14 @@
         background-color: #3e8e41;
       }
       .projectiontable {
-    margin-top: 10px;
-    margin-left: 8%; /* Adjust this value as needed */
-    display: flex; /* Set to display flex */
-    flex-direction: column; /* Column layout */
+        margin-top: 10px;
+        margin-left: 8%; /* Adjust this value as needed */
+        display: flex; /* Set to display flex */
+        flex-direction: column; /* Column layout */
+        overflow: scroll;
+        height: 100%;
+      }
 
-    /* Add any other styles you want to apply to the "projectionclass" here */
-  }
-
-#outside{
-        height: 100%;}
-      .carousel-indicators {
-  /* Adjust the position of the carousel indicators */
-  /* Example: move the indicators to the right */
-  position: absolute;
-  right: 0;
-  left: initial;
-  bottom: 10px;
-  z-index: 15;
-}
 
 .carousel-control-prev,
 .carousel-control-next {
@@ -155,19 +144,31 @@
 
   #outside {
     display: flex;
-    align-items: center;
-
+    
+    /* align-items: flex-start; */
   }
 
-  .board {
-    margin-left: 30%;
+            
+  .carousel-indicators {
+        /* Adjust the position of the carousel indicators */
+        /* Example: move the indicators to the right */
+        position: absolute;
+        right: 0;
+        left: initial;
+        bottom: 10px;
+        z-index: 15;
   }
+
+
+.board {
+    margin-top: 2rem;
+}
 
 .element{
   height: 100%;
 }
 .container {
-  height: 400px;
+  height: 100px;
   overflow: auto; /* Enable scrolling */
 }
 
@@ -178,7 +179,7 @@
   </head>
 
   <body>
-    <svg xmlns="./logo.svg" style="display: none">
+   <svg xmlns="./logo.svg" style="display: none">
       <symbol id="bootstrap" viewBox="0 0 118 94">
         <title>玉子屋</title>
         <path
@@ -286,15 +287,12 @@
       </symbol>
     </svg>
 
-    <main>
-      <h1 class="visually-hidden">Japan</h1>
 
 
   <div id="outside">
       <div
         class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
         style="width: 280px;"
-      
       >
         <a
           href="/"
@@ -308,10 +306,10 @@
 
           <span class="fs-4"></span>
         </a>
-        <hr />
+        <hr/>
         <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
+            <a href="index.html" class="nav-link active" aria-current="page">
               <svg class="bi me-2" width="16" height="16">
                 <use xlink:href="#home" />
               </svg>
@@ -374,7 +372,7 @@
             <li><a class="dropdown-item" href="#">Profile</a></li>
             <li>
               <hr class="dropdown-divider" />
-            </li>container
+            </li>
             <li><a class="dropdown-item" href="#">Sign out</a></li>
           </ul>
         </div>
@@ -410,10 +408,10 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
-          <a href="https://www.tamagoya.co.jp/" style="font-size: 2rem;">玉子屋公式チャンネル</a>
+          <a href="https://www.tamagoya.co.jp/" style="font-size: 2rem; margin-top: 2rem;">參考資源（官網）: 玉子屋公式チャンネル</a>
       <div class="board">
-       
-        <iframe width="400" height="300" src="https://www.youtube.com/embed/cnM3BZ9Ri6k" title="年賺180億的史上最強便當店！老闆長超凶每天只願意做一道菜，成功秘訣竟然是好到變態的外送服務？#外送 #便當 #美食 #經典 #服務 #營銷" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <p style="font-size: 2rem;">參考資源（YouTube 訪問）</p><br>
+        <iframe width="600" height="400" src="https://www.youtube.com/embed/cnM3BZ9Ri6k" title="年賺180億的史上最強便當店！老闆長超凶每天只願意做一道菜，成功秘訣竟然是好到變態的外送服務？#外送 #便當 #美食 #經典 #服務 #營銷" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
 
         
@@ -423,7 +421,6 @@
         </div>
         </div>
       </div>
-    </main>
 
     <!-- Latest CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
