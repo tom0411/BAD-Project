@@ -13,3 +13,4 @@ export let env = {
 };
 
 populateEnv(env, { mode: "halt" });
+console.log(env)

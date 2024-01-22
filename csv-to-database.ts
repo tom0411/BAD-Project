@@ -13,7 +13,7 @@ async function dataBase() {
     array.push({ date: new Date(Date.parse(year + "/" + month + "/" + day) + 8 * 60 * 60 * 1000), holiday: holiday == "TRUE", temperature, rainfall, demand });
   }
 
-  let result = await knex("badproject").insert(array).into("history");
+  let result = await knex().insert(array).into("history");
   console.log("Seeded");
   process.exit(0);
 }
