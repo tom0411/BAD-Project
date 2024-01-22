@@ -241,7 +241,13 @@ fetch('https://ai.impetus-go.me/', {
         2023,1,26,26/1/2023,THURSDAY,FALSE,15.7,0.0,3398
         2023,1,27,27/1/2023,FRIDAY,FALSE,15.4,0.0,3400
         2023,1,28,28/1/2023,SATURDAY,FALSE,12.9,0.0,2151
+        2023,1,29,29/1/2023,SUNDAY,FALSE,12.8,0.0,1047
+        2023,1,30,30/1/2023,MONDAY,FALSE,15.0,0.0,2823
+        2023,1,31,31/1/2023,TUESDAY,FALSE,16.9,0.0,2756
         `;
+
+        
+
 
 // Parse the CSV data into an array of objects
 const parseCSV = (csv) => {
@@ -257,8 +263,7 @@ const parseCSV = (csv) => {
     return obj;
   });
   return data;
-
-}
+    }
 
 const dataObjects = parseCSV(csvData);
 
@@ -282,6 +287,39 @@ for (const date of dateArray) {
   const demandForDate = findDemandForDate(dataObjects, date);
   demandArray.push(demandForDate);
 }
+
+
+//Weekday
+const findWeekDayForDate = (data, date) => {
+    const result = data.find(item => item.Date === date);
+    return result.Weekday; 
+  };
+var weekdayArray = [];
+for (const date of dateArray) {
+  const weekDayForDate = findWeekDayForDate(dataObjects, date);
+  weekdayArray.push(weekDayForDate);
+};
+//Temperature
+const findTempForDate = (data, date) => {
+    const result = data.find(item => item.Date === date);
+    return result.Temperature; 
+  };
+var tempArray = [];
+for (const date of dateArray) {
+  const tempForDate = findTempForDate(dataObjects, date);
+  tempArray.push(tempForDate);
+};
+//Rainfall
+const findRainForDate = (data, date) => {
+    const result = data.find(item => item.Date === date);
+    return result.Rainfall; 
+  };
+var rainArray = [];
+for (const date of dateArray) {
+  const rainForDate = findRainForDate(dataObjects, date);
+  rainArray.push(rainForDate);
+};
+
 
 
 
@@ -310,6 +348,10 @@ if (array1.length === array2.length) {
     }
 }
 
+
+
+
+
 // If needed, you can now use the percentageDifferences array elsewhere in your code
 
     // Print the arrays
@@ -326,24 +368,25 @@ if (array1.length === array2.length) {
     // console.log(demandArray);
     // Now pass the dynamically generated dateArray to the function
     addRowToSecondTable('Date', dateArray);
+    addRowToSecondTable('Weekday', weekdayArray);
+    addRowToSecondTable('Avg Temp (˚C)', tempArray);
+    addRowToSecondTable('Rainfall',rainArray);
     addRowToSecondTable('Amount',demandArray);
     addRowToSecondTable('+/- Rate', percentageDifferences);
 
-  
 })
 .catch(error => {
     console.error('Error:', error);
-}); // Append the entire row to the table body
-// .catch(error => {
-//     console.error('There was a problem with the fetch operation:', error);
-// });
+}); 
 
 
 }
 loadTable();
 
 
-    // ... (Any additional code)
+
+
+
 
 /*
 // altenative table structuring way with function
