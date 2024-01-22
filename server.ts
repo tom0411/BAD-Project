@@ -14,14 +14,14 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 
-app.get("/", (req, res, next) => {
-    if (req.url === "/"){ // && !req.session.username) {
-        let file = path.resolve("public", "index.html");
-        res.sendFile(file);
-        return;
-    }
-    next();
-});
+// app.get("/", (req, res, next) => {
+//     if (req.url === "/"){ // && !req.session.username) {
+//         let file = path.resolve("public", "index.html");
+//         res.sendFile(file);
+//         return;
+//     }
+//     next();
+// });
 
 
 
@@ -51,40 +51,6 @@ app.get("/list", async (req, res) => {
   }
 });
 
-app.get("/history", async (req, res) => {
-  try {
-    let query = req.query;
-    let min = query.min;
-    let max = query.max;
-    let holiday = query.holiday;
-
-    if (!min || !max) {
-      throw new Error("Bad request");
-    }
-
-    let results = await knex("history").select("date", "holiday", "temperature", "rainfall", "demand").andWhere("id", ">=", min);
-
-    let array = [];
-
-    for (let result of results) {
-      if (holiday) {
-        if (result.holiday != (holiday == "yes")) {
-          continue;
-        }
-      }
-      array.push(result);
-
-      if (array.length > +max - +min) {
-        break;
-      }
-    }
-
-    res.json({ result: array });
-  } catch (error) {
-    res.json({ error: error });
-  }
-});
-
 app.get("/projection.html", async (req, res) => {
   try {
     res.sendFile(path.join(__dirname, 'public', 'projection.html'));
@@ -103,6 +69,32 @@ app.get("/record", async (req, res) => {
   }
 });
 
+app.get("/history", async (req, res) => {
+  try {
+    let query = req.query;
+    let min = query.min;
+    let max = query.max;
+    let holiday = query.holiday;
+
+    
+    let booleanHoliday =( holiday == 'yes')
+    console.log({
+      min,
+      max,
+      booleanHoliday
+    })
+    if (!min || !max) {
+      throw new Error("Bad request");
+    }
+
+    let results = await knex('history').select("date", "holiday", "temperature", "rainfall", "demand").whereBetween('temperature', [min, max]).andWhere('holiday', booleanHoliday);
+
+    res.json({ result: results });
+  } catch (error) {
+    console.log(error)
+    res.json({ error: error });
+  }
+});
 
 
 

@@ -14,10 +14,6 @@ async function main() {
 
   const res = await fetch(`/history?min=${min}&max=${max}&holiday=${hoilday}`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
   });
 
   const json = await res.json();

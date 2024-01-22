@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -337,23 +336,44 @@
 
     <script src="sidebars.js"></script>
     <script>
-      onload = fetch('js/historical_v.csv').then(res => {
-          return res.text();
+      onload = fetch('/history?min=5&max=15&holiday=yes').then(res => {
+          return res.json();
       }).then(data => {
-          let result = data.split(/\r?\n|\r/).map(e => {
-              return e.split(',');
-          })
-          result.forEach(e => {
-            let m = e.map(e => {
-                return `<td>${e}</td>`;
-            }); // use '.join()' to eliminate ',' and join elements of <td>
+          // let result = data.split(/\r?\n|\r/).map(e => {
+          //     return e.split(',');
+          // })
+          results =data.result
+          // console.log(data)
+          let ce = document.createElement('tr');
+          ce.innerHTML += `<td>Date</td>`;
+          ce.innerHTML += `<td>Holiday</td>`;
+          ce.innerHTML += `<td>Temperature</td>`;
+          ce.innerHTML += `<td>Rainfall</td>`;
+          ce.innerHTML += `<td>Demand</td>`;
+          document.getElementById('fromCSV').appendChild(ce);
+
+          for (let result of results) {
             let ce = document.createElement('tr');
-            for (i=3; i<=8; i++) {
-            ce.innerHTML += m[i];
+            // console.log(result)
+            for(let key in result) {
+              value = result[key];
+              ce.innerHTML += `<td>${value}</td>`;
+
             }
             document.getElementById('fromCSV').appendChild(ce);
-            console.log(m);
-        })
+          }
+        //   data.forEach(e => {
+        //     console.log(e)
+        //     let m = e.map(e => {
+        //         return `<td>${e}</td>`;
+        //     }); // use '.join()' to eliminate ',' and join elements of <td>
+        //     let ce = document.createElement('tr');
+        //     for (i=3; i<=8; i++) {
+        //     ce.innerHTML += m[i];
+        //     }
+        //     document.getElementById('fromCSV').appendChild(ce);
+        //     console.log(m);
+        // })
       });
 
     </script>
